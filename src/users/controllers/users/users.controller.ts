@@ -12,6 +12,7 @@ import { CreateUserDto } from 'src/dtos/CreateUser.dto';
 import { UpdateUserDto } from 'src/dtos/UpdateUser.dto';
 import { UsersService } from 'src/users/services/users/users.service';
 
+
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
@@ -34,6 +35,12 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto,
   ) {
     const res = await this.userService.updateUser(id, updateUserDto);
+    return res;
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id', ParseIntPipe) id: number) {
+    const res = await this.userService.deleteUser(id);
     return res;
   }
 

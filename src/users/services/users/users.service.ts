@@ -46,5 +46,17 @@ export class UsersService {
       throw new InternalServerErrorException();
     }
   };
+
+  deleteUser =async (id:number):Promise<any> => {
+    try {
+      return await this.userRepository.createQueryBuilder()
+                    .delete()
+                    .from(User)
+                    .where("id= :id",{id:id})
+                    .execute()
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
   
 }
