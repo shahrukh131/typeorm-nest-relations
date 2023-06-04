@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 import {} from 'class-validator';
+import { Profile } from 'src/profile/entities/profile.entity';
+import { profile } from 'console';
 @Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn()
@@ -18,4 +20,8 @@ export class User {
 
   @Column({ name: 'auth_strategy', nullable: true })
   authStrategy: string;
+
+  @OneToOne(()=>Profile,{cascade:true})
+  @JoinColumn()
+  profile:Profile
 }
